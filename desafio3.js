@@ -11,7 +11,7 @@ const server = app.listen(PORT, () => {
 });
 
 server.on('error', error => {
-    console.log('Error en servidor', error);
+    console.log('Error en servidor ${error}');
 });
 
 app.get('/productos', async (req,res) => {
@@ -19,8 +19,9 @@ app.get('/productos', async (req,res) => {
         res.send (products);
 });
 
-app.get('/productoRandom',  async (req,res) => {
+app.get('/productosRandom',  async (req,res) => {
     const products = await productos.getAll();
         const random = parseInt(Math.random() * products.length);
+        console.log(random)
         res.send(products[random]);
 });
