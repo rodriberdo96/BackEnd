@@ -11,7 +11,7 @@ const server = app.listen(PORT, () => {
 });
 
 server.on('error', error => {
-    console.log('Error en servidor ${error}');
+    console.log('Error en servidor ',error);
 });
 
 app.get('/productos', async (req,res) => {
