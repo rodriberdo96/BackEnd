@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce</title>
+</head>
+<body>
+    <h1>Home</h1>
+    <h2>Productos</h2>
+    <form action="" method="get">
+        <input type="text" name="search" placeholder="Buscar">
+        <button type="submit">Buscar</button>
+    </form>
+
+    <form action="/api/productos" method="post" name="productos">
+        <input type="text" name="title" placeholder="Nombre">
+        <input type="text" name="price" placeholder="Precio">
+        <input type="text" name="thumbnail" placeholder="Descripción">
+        <button type="submit">Crear</button>
+    </form>
+</body>
+</html>

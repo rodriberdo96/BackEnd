@@ -1,16 +1,18 @@
+//importaciones
 const {promises: fs} = require ('fs')
+const {send} = require ('express')
 
+//instancias
 class Contenedor {
     constructor(route) {
         this.route = route
     }
-    async getAll(){
+    async getAll(req,res){
         try {
             const content = JSON.parse(await fs.readFile(`./${this.route}`,'utf-8'))
-            return content
+            res.send (content)
         } catch (error) {
-            console.log(error)
-            return []
+            res.send(error)
         }
     }
     async deleteById (id) {
@@ -24,7 +26,7 @@ class Contenedor {
             console.log(error)
         }
     }
-    async save(obj) {
+    async save(req,res,obj) {
             const productos = await this.getAll()
             let newId;
             if(productos.length == 0){
@@ -36,18 +38,23 @@ class Contenedor {
             productos.push(newObj);
             try {
                 await fs.writeFile(`./${this.route}`,JSON.stringify(productos, null, 2))
-                console.log(productos)
+                res.send(newObj)
             } catch (error) {
-                console.log(error)
+                res.send(error)
             }
     }
-    async getById(id){
+    async getById(req,res,id){
         try {
             const content = JSON.parse(await fs.readFile(`./${this.route}`,'utf-8'))
-            const elementosFiltrados = content.filter(e => e.id === id)
+            const elementosFiltrados = content.filter(e => e.id === (parseint(id)))
             console.log(elementosFiltrados)
+            if (elementosFiltrados.length === 0){
+                res.send ( {error:'no se encontro el producto'})
+            } else {
+                res.send (elementosFiltrados)
+            }
         } catch (error) {
-            console.log(error)
+            res.send(error)
             null
         }
     }
@@ -63,6 +70,7 @@ class Contenedor {
     }
 }
 
-module.exports = Contenedor
+
+
 
 module.exports = Contenedor;
