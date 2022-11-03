@@ -1,7 +1,7 @@
 //importaciones
 const express = require('express');
 const Contenedor=  require ('./contenedor.js');
-const {router} = express
+const {Router} = express
 
 //instancias
 const routerProductos =  new Router();
